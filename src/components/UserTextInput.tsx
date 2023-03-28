@@ -28,14 +28,26 @@ export default function UserTextInput({ loading, selections, onSend }: Props) {
   const [message, setMessage] = React.useState("");
 
   return (
-    <Box bottom={Constants.userInputBottomDistance} width="100%" left={0}>
+    <Box
+      bottom={Constants.userInputBottomDistance}
+      width="100%"
+      height={Constants.userInputHeight}
+      left={0}
+    >
       <Stack
-        justifyContent={"center"}
+        height={"100%"}
+        justifyContent="space-between"
         alignContent="center"
         alignItems={"center"}
         spacing={2}
       >
-        <Grid container spacing={2} width={Constants.userInputWidth + 200}>
+        <Grid
+          container
+          spacing={2}
+          width={Constants.userInputWidth + 200}
+          maxHeight={Constants.userInputHeight - Constants.inputAreaHeight}
+          style={{ overflow: "scroll" }}
+        >
           {selections.map((selection) => (
             <Grid item xs={6}>
               <Card

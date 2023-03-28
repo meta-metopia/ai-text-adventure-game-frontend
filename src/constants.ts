@@ -6,5 +6,7 @@ export const Constants = {
   promptCardRadius: 8,
   userInputWidth: 800,
   userInputBottomDistance: 30,
+  userInputHeight: 250,
+  inputAreaHeight: 100,
   welcomeMessage: "Welcome to AI StoryQuest!",
 };

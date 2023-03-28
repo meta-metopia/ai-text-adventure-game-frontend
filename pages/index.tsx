@@ -105,7 +105,7 @@ export default function Home(props: Props) {
         {session.data && (
           <List
             style={{
-              maxHeight: `calc(100vh - ${Constants.appbarHeight}px - 300px)`,
+              height: `calc(100vh - ${Constants.appbarHeight}px - ${Constants.userInputHeight}px - 50px)`,
               overflowY: "scroll",
             }}
           >

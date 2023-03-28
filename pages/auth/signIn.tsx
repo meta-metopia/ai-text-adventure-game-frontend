@@ -31,7 +31,7 @@ export default function Login() {
   return (
     <div>
       <Head>
-        <title>{Constants.appName} | Sign In</title>
+        <title>{Constants.appName}</title>
       </Head>
       <div className={styles.bgImageContainer}>
         <Image
