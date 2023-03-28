@@ -13,6 +13,7 @@ import styles from "@/styles/Home.module.css";
 
 interface PromptProps {
   prompts: string[];
+  onPromptClick: (prompt: string) => void;
 }
 
 export default function PromptPicker(props: PromptProps) {
@@ -27,13 +28,12 @@ export default function PromptPicker(props: PromptProps) {
           >
             {Constants.welcomeMessage}
           </Typography>
-
           <Divider sx={{ pt: 2 }}>
             <Typography>Pick a prompt to start</Typography>
           </Divider>
         </Grid>
         {props.prompts.map((prompt) => (
-          <Grid item xs={6}>
+          <Grid item xs={6} key={prompt}>
             <Card
               sx={{
                 height: Constants.promptCardHeight,
@@ -41,7 +41,10 @@ export default function PromptPicker(props: PromptProps) {
               }}
               variant="outlined"
             >
-              <CardActionArea sx={{ height: "100%" }}>
+              <CardActionArea
+                sx={{ height: "100%" }}
+                onClick={() => props.onPromptClick(prompt)}
+              >
                 <Stack
                   justifyContent={"center"}
                   alignItems={"center"}

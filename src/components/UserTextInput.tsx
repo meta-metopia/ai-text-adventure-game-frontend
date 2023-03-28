@@ -1,51 +1,85 @@
 import {
   Box,
   Button,
+  Card,
+  CardActionArea,
+  CardContent,
   Chip,
   CircularProgress,
+  Grid,
   IconButton,
+  InputBase,
   Paper,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import React from "react";
+import React, { useCallback } from "react";
+import { Constants } from "../constants";
 
 interface Props {
   loading: boolean;
   selections: string[];
+  onSend: (message: string) => Promise<void>;
 }
 
-export default function UserTextInput({ loading, selections }: Props) {
+export default function UserTextInput({ loading, selections, onSend }: Props) {
+  const [message, setMessage] = React.useState("");
+
   return (
-    <Box position={"absolute"} bottom={100} width="100%" left={0}>
+    <Box
+      position={"absolute"}
+      bottom={Constants.userInputBottomDistance}
+      width="100%"
+      left={0}
+    >
       <Stack
         justifyContent={"center"}
         alignContent="center"
         alignItems={"center"}
         spacing={2}
       >
-        <Stack
-          direction={"row"}
-          spacing={2}
-          justifyContent="center"
-          alignItems={"center"}
-        >
-          <Typography variant="caption">Your choice:</Typography>
+        <Grid container spacing={2} width={Constants.userInputWidth + 200}>
           {selections.map((selection) => (
-            <Chip label={selection} key={selection} color="info" />
+            <Grid item xs={6}>
+              <Card
+                sx={{
+                  borderRadius: 6,
+                  boxShadow:
+                    "rgb(145 158 171 / 20%) 0px 0px 2px 0px, rgb(145 158 171 / 12%) 0px 12px 24px -4px",
+                  borderWidth: 0,
+                }}
+                variant="outlined"
+              >
+                <CardActionArea
+                  disabled={loading}
+                  onClick={async () => {
+                    await onSend(selection);
+                  }}
+                >
+                  <CardContent>
+                    <Typography>{selection}</Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Grid>
           ))}
-        </Stack>
+        </Grid>
         <Paper sx={{ borderRadius: 5 }} elevation={0} variant="outlined">
-          <Stack p={3} direction="row" spacing={2}>
-            <TextField
+          <Stack px={3} py={1} direction="row" spacing={2}>
+            <InputBase
               fullWidth
-              variant="standard"
               multiline
-              rows={2}
-              sx={{ width: 500 }}
-              helperText="You can also type your response here."
+              value={message}
+              onKeyDown={async (e) => {
+                if (e.key === "Enter") {
+                  await onSend(message);
+                  setMessage("");
+                }
+              }}
+              onChange={(e) => setMessage(e.target.value)}
+              sx={{ width: Constants.userInputWidth }}
               placeholder="Type your response here"
               disabled={loading}
             />
@@ -55,7 +89,12 @@ export default function UserTextInput({ loading, selections }: Props) {
               </Box>
             )}
             {!loading && (
-              <IconButton>
+              <IconButton
+                onClick={async () => {
+                  await onSend(message);
+                  setMessage("");
+                }}
+              >
                 <SendIcon />
               </IconButton>
             )}
