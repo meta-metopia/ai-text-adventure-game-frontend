@@ -24,6 +24,7 @@ import axios from "axios";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
 import { useCallback, useMemo, useRef, useState } from "react";
+import Head from "next/head";
 
 interface Props {
   prompts: { name: string }[];
@@ -75,6 +76,9 @@ export default function Home(props: Props) {
 
   return (
     <div style={{ height: "100%" }}>
+      <Head>
+        <title>{Constants.appName}</title>
+      </Head>
       {!Boolean(session.data) && (
         <div className={styles.bgImageContainer}>
           <Image

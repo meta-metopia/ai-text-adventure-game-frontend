@@ -4,6 +4,7 @@ import { Constants } from "@/src/constants";
 import styles from "@/styles/Home.module.css";
 import { GetServerSideProps } from "next";
 import { signIn } from "next-auth/react";
+import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
@@ -29,6 +30,9 @@ export default function Login() {
 
   return (
     <div>
+      <Head>
+        <title>{Constants.appName} | Sign In</title>
+      </Head>
       <div className={styles.bgImageContainer}>
         <Image
           src={"/login-bg.jpg"}
