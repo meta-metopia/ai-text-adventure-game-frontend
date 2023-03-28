@@ -28,12 +28,7 @@ export default function UserTextInput({ loading, selections, onSend }: Props) {
   const [message, setMessage] = React.useState("");
 
   return (
-    <Box
-      position={"absolute"}
-      bottom={Constants.userInputBottomDistance}
-      width="100%"
-      left={0}
-    >
+    <Box bottom={Constants.userInputBottomDistance} width="100%" left={0}>
       <Stack
         justifyContent={"center"}
         alignContent="center"
