@@ -50,17 +50,25 @@ export default function AuthenticationCard({
           {welcomeText}
         </Typography>
         <Typography>{authenticationText}</Typography>
-        <Card sx={{ width: 500, borderRadius: 5 }} variant="outlined">
+        <Card
+          sx={{
+            width: {
+              xs: "100%",
+              sm: "50%",
+              md: 550,
+            },
+          }}
+        >
           <CardContent>
-            <Stack spacing={4}>
+            <Stack spacing={4} m={4}>
               <TextField
-                variant="filled"
+                variant="outlined"
                 placeholder="User Name"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
               <TextField
-                variant="filled"
+                variant="outlined"
                 placeholder="Password"
                 type="password"
                 value={password}

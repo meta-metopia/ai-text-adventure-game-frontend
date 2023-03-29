@@ -39,8 +39,7 @@ export class SessionService {
         console.log("No session found");
         return null;
       }
-      console.log(error);
-      throw error;
+      return null;
     }
   }
 
